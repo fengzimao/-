@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>form</title>
+	<script src="ajax.js"></script>
+</head>
+<body>
+	<div>
+		账号：<input type="text" id="user"><br>
+		密码：<input type="password" id="pass"><br>
+		<input type="button" value="登录" id="btn">
+	</div>
+</body>
+<script>
+	btn.onclick=function(){
+		
+			ajax("form.php?user="+user.value+"&pass="+pass.value,success,err);
+			function success(d){
+				alert(d);
+			}
+			function err(sta){
+				alert(sta);
+			}
+	}
+</script>
+</html>

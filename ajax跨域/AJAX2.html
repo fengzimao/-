@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="请求数据" id="btn">
+	<div id="box"></div>
+</body>
+<script>
+	var btn=document.getElementById('btn');
+	var box=document.getElementById('box');
+	btn.onclick=function  () {
+		// 1.创建XMLHttpRequest对象
+		if (window.XMLHttpRequest) {
+			//非ie56
+			var xhr=new XMLHttpRequest();
+		}else{
+			//IE56
+			var xhr=new ActiveXObject('Microsoft XMLHTTP')
+		};
+		// 2.创建于服务器连接
+		xhr.open("get","Http://localhost/09-06-ajax1/anli/test1.json?t"+new Date().getTime(),true);
+		// 3.发送请求
+		xhr.send();
+		// 4.接受数据
+		xhr.onreadystatechange=function (){
+			if (xhr.readyState==4) {
+				if (xhr.status==200) {
+					var str=xhr.responseText;
+					var obj=eval('('+str+')');
+					var txt="";
+					for (var i = obj.title.length - 1; i >= 0; i--) {
+						txt=txt+"书名："+obj.title[i]+"作者："+obj.author[i]+"<br/>";
+					};
+					box.innerHTML=txt;
+				}else{
+					alert("响应失败");
+				};
+			};
+		}
+	}
+</script>
+</html>

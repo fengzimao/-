@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>user</title>
+	<script src="ajax.js"></script>
+	<style>
+	input{
+		font-size: 30px;
+	}
+	</style>
+</head>
+<body>
+	<div>
+		账号：<input type="text" id="admin"><br>
+		密码：<input type="password" id="pwd"><br>
+		<input type="button" value="登录" id="login">
+		<input type="button" value="注册" id="add">
+	</div>
+</body>
+<script>
+login.onclick=function(){
+	if(admin.value==''||pwd.value==""){
+		alert("NO");
+	}else{
+		ajax("user.php?act=login&user="+admin.value+"&pass="+pwd.value,success1,err1);
+		function success1(data){
+			// {err: 0/1, msg: 文字描述信息}
+			var data=eval("("+data+")");
+			if(data.err==0){
+				alert(data.msg);
+			}else{
+				alert(data.msg);
+			}
+			
+		}
+		function err1(d){
+			alert(d);
+		}
+	}
+}
+add.onclick=function(){
+	if(admin.value==''||pwd.value==""){
+		alert("NO");
+	}else{
+		ajax("user.php?act=add&user="+admin.value+"&pass="+pwd.value,success2,err2);
+		function success2(data){
+			// {err: 0/1, msg: 文字描述信息}
+			var data=eval("("+data+")");
+
+			if(data.err==0){
+				alert(data.msg);
+			}else{
+				alert(data.msg);
+			}
+			
+		}
+		function err2(d){
+			alert(d);
+		}
+	}
+}
+</script>
+</html>

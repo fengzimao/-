@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsonp跨域</title>
+	<link rel="stylesheet" href="reset.css">
+	<style>
+		#ipt{
+			width: 500px;
+			height: 60px;
+			margin: 0 50px;
+		}
+		#list{
+			width: 500px;
+			margin: 0 50px;
+			border: 1px solid red;
+		}
+		#list li{
+			font-size: 30px;
+			line-height: 50px;
+			padding: 5px 10px;
+			cursor: pointer;
+		}
+		#list li:hover{
+			background: #333;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="ipt">
+	<ul id="list">
+		
+	</ul>
+</body>
+<script>
+// http://suggestion.baidu.com/su?
+	var s=null;
+	ipt.onkeyup=function(){
+		if(s){
+			document.body.removeChild(s);
+
+		}
+		s=document.createElement("script");
+		s.src="http://suggestion.baidu.com/su?cb=callback&wd="+ipt.value;
+		document.body.appendChild(s);
+	}
+	function callback(d){
+		 console.log(d);
+		// var d=eval("("+d+")");
+		var arr=d.s;
+		list.innerHTML="";
+		for (var i = 0; i < arr.length; i++) {
+			var oli=document.createElement("li");
+			oli.innerHTML=arr[i];
+			list.appendChild(oli);
+		};
+	}
+	
+</script>
+</html>

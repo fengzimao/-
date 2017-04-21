@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="请求数据" id="btn">
+	<div id="box"></div>
+	<input type="text" id="t">
+</body>
+<script>
+	var btn=document.getElementById('btn');
+	var box=document.getElementById('box');
+	var t=document.getElementById('t');
+	btn.onclick=function  () {
+		// 1.创建XMLHttpRequest对象
+		if (window.XMLHttpRequest) {
+			//非ie56
+			var xhr=new XMLHttpRequest();
+		}else{
+			//IE56
+			var xhr=new ActiveXObject('Microsoft XMLHTTP')
+		};
+		// 2.创建于服务器连接
+		xhr.open("post","Http://localhost/09-06-ajax1/anli/text.xml?t"+new Date().getTime(),true);
+		// 3.发送请求
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr.send("user="+t.value);
+		// 4.接受数据
+		xhr.onreadystatechange=function (){
+			if (xhr.readyState==4) {
+				if (xhr.status==200) {
+					var obj=xhr.responseXML;
+					var title=obj.getElementsByTagName('title');
+					var txt="";
+					for (var i = title.length - 1; i >= 0; i--) {
+						txt=txt+title[i].innerHTML+"<br/>"
+					};
+					box.innerHTML=txt;
+					
+					
+				}else{
+					alert("响应失败");
+				};
+			};
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,19 @@
+ajax要跨域的话，可以用服务器去别的网站取内容
+给页面的ajax一个url，ajax把这个url传给服务器，由服务器去访问跨域地址
+
+jsonp 全称是JSON with Padding，是为了解决跨域请求资源而产生的解决方案
+jsonp是“用来跨域的”
+
+iframe、img、style、script等元素的src属性可以直接向不同域请求资源
+
+jsonp正是利用script标签跨域能力请求资源的
+
+既然它叫jsonp，很明显目的还是json，而且是跨域获取。根据上面的分析，很容易想到：利用js构造一个script标签，把json的url赋给script的scr属性，把这个script插入到dom里，让浏览器去获取
+回调方法要遵从服务端的约定，一般是用‘callback’或者‘cb’
+
+一句话就是利用script标签获得一个类似这样的数据：
+jsonpcallback({"name":"nihao","age":"23"})
+jsonpcallback是页面存在的回调方法，参数就是想得到的json。
+
+当然使用jsonp会在一定程度上造成安全性问题，如果请求的是不安全的站点，那么可能会在返回的方法调用中包含一些恶意代码，所以尽量向信任的站点发送请求。
+

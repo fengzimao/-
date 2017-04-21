@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax1</title>
+</head>
+<body>
+	<button id="btn">请求数据</button>
+	<div id="box"></div>
+</body>
+<script>
+	btn.onclick=function(){
+		if(window.XMLHttpRequest){
+			var xhr=new XMLHttpRequest();
+		}else{
+			var xhr=new ActiveXObject("Microsoft XMLHTTP");
+		}
+		xhr.open("get","test1.json?t="+new Date().getTime()+"&user="+111,true);
+		xhr.send();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4){
+				if(xhr.status==200){
+					var str=xhr.responseText;
+					var json=eval("("+str+")");
+					console.log(json)
+				}else{
+					box.innerHTML=xhr.status;
+				}
+			}else{
+				box.innerHTML=xhr.response;
+			}
+		}
+	}
+</script>
+</html>

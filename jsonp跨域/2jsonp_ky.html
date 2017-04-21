@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">请求数据</button>
+	<h1 id="box"></h1>
+</body>
+<script>
+	btn.onclick=function(){
+		var s=document.createElement("script");
+		s.src="http://freegeoip.net/json/?callback=cb";
+		document.body.appendChild(s);
+	}
+	function cb(d){
+		console.log(d);
+		box.innerHTML="你的国家："+d.country_name+"你的地方："+d.city+"你的ip:"+d.ip;
+		
+	}
+</script>
+</html>

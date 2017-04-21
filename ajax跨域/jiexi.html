@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串，json对象之间的转换</title>
+</head>
+<body>
+	
+</body>
+<script>
+	var str='{"name":"郝柳婷","age":18,"sex":"女"}';
+	var str2={"name":"郝柳婷","age":18,"sex":"女"};
+	// var obj=eval('('+str+')');
+	// var obj=JSON.parse(str);
+
+	// alert(typeof(obj))
+	var obj=JSON.stringify(str2)
+	
+	alert(typeof(obj))
+</script>
+</html>
